@@ -1,0 +1,20 @@
+// Hello, name
+
+name = input("What is your name? ")
+print(f"hello, {name}")
+
+// Recreate Mario's half-pyramid using hashes (#) for blocks, with user input as height
+
+while True:
+    try:
+        height = int(input("Height: "))
+        if height < 9 and height > 0:
+            break
+    except ValueError:
+        print("Please enter an integer.")
+
+def print_row():
+    for i in range(1, height + 1):
+        print(" " * (height - i) + "#" * i + "  " + "#" * i + " " * (height - i))
+
+print_row()
