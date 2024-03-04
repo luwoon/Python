@@ -3,7 +3,7 @@
 name = input("What is your name? ")
 print(f"hello, {name}")
 
-// Recreate Mario's half-pyramid using hashes (#) for blocks, with user input as height
+// Recreate Nintendo’s Super Mario Brothers's pyramid using hashes (#), allowing users to state height of pyramid
 
 while True:
     try:
@@ -18,3 +18,11 @@ def print_row():
         print(" " * (height - i) + "#" * i + "  " + "#" * i + " " * (height - i))
 
 print_row()
+
+// Return minimum number of coins (25, 10, 5, or 1 cent-coins) to make up stated amount of change in cents
+
+
+// Check validity of Mastercard, Visa, and Amex numbers
+
+
+
