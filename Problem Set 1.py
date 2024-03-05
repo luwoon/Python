@@ -1,9 +1,9 @@
-// Hello, name
+# Hello, name
 
 name = input("What is your name? ")
 print(f"hello, {name}")
 
-// Recreate Nintendo’s Super Mario Brothers's pyramid using hashes (#), allowing users to state height of pyramid
+# Recreate Nintendo’s Super Mario Brothers's pyramid using hashes (#), allowing users to state height of pyramid
 
 while True:
     try:
@@ -19,7 +19,7 @@ def print_row():
 
 print_row()
 
-// Return minimum number of coins (25, 10, 5, or 1 cent-coins) to make up stated amount of change in cents
+# Return minimum number of coins (25, 10, 5, or 1 cent-coins) to make up stated amount of change in cents
 
 from cs50 import get_float
 
@@ -43,7 +43,7 @@ while change >= 1:
 
 print(ncoin)
 
-// Check validity of Mastercard, Visa, and Amex numbers
+# Check validity of Mastercard, Visa, and Amex numbers
 
 number = input("Number: ")
 length = len(number)
