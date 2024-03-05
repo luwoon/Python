@@ -45,5 +45,51 @@ print(ncoin)
 
 // Check validity of Mastercard, Visa, and Amex numbers
 
+number = input("Number: ")
+length = len(number)
 
+def main():
+    product = every_other(number)
+    product_sum = digit_sum(product)
+    remaining_sum_val = remaining_sum(number)
+    final = remaining_sum_val + product_sum
+    if final % 10 != 0:
+        print("INVALID")
+    else:
+        if (int(number) >= 340000000000000 and int(number) <= 349999999999999)  or (int(number) >= 370000000000000 and int(number) <= 379999999999999):
+            print("AMEX")
+        elif (int(number) >= 5100000000000000 and int(number) <= 5599999999999999):
+            print("MASTERCARD")
+        elif (int(number) >= 4000000000000 and int(number) <= 4999999999999) or (int(number) >= 4000000000000000 and int(number) <= 4999999999999999):
+            print("VISA")
+
+def every_other(number):
+    product = ""
+    if length % 2 == 0: # even number of digits
+        for digit in range(0, length, 2):
+            doubled = int(number[digit]) * 2
+            product += str(doubled)
+    elif length % 2 == 1: #odd number of digits
+        for digit in range(1, length, 2):
+            doubled = int(number[digit]) * 2
+            product += str(doubled)
+    return(product)
+
+def digit_sum(number):
+    sum = 0
+    for digit in number:
+        sum += int(digit)
+    return(sum)
+
+def remaining_sum(number):
+    sum = 0
+    if length % 2 == 0: # even number of digits
+        for digit in range(1, length, 2):
+            sum += int(number[digit])
+    elif length % 2 == 1: #odd number of digits
+        for digit in range(0, length, 2):
+            sum += int(number[digit])
+    return(sum)
+
+main()
 
