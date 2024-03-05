@@ -93,3 +93,45 @@ def remaining_sum(number):
 
 main()
 
+# Readability test based on Coleman-Liau index 
+
+text = input("Text: ")
+
+def main():
+    words = word_count(text)
+    sentences = sentence_count(text)
+    letters = letter_count(text)
+    avg_letters = letters / words * 100
+    avg_sentences = sentences / words * 100
+    index = 0.0588 * avg_letters - 0.296 * avg_sentences - 15.8
+    if index < 1.5:
+        print("Before Grade 1")
+    elif index >= 16.0:
+        print("Grade 16+")
+    else:
+        rounded_index = round(index)
+        print(f"Grade {rounded_index}")
+
+def word_count(text):
+    n_words = 1
+    for char in text:
+        if char == " ":
+            n_words += 1
+    return(n_words)
+
+def sentence_count(text):
+    n_sentences = 0
+    for char in text:
+        if char == "." or char == "!" or char == "?":
+            n_sentences += 1
+    return(n_sentences)
+
+def letter_count(text):
+    text = text.lower()
+    n_letters = 0
+    for char in text:
+        if char >= 'a' and char <= 'z':
+            n_letters += 1
+    return(n_letters)
+
+main()
