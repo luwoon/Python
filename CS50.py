@@ -1,10 +1,4 @@
-# Hello, name
-
-name = input("What is your name? ")
-print(f"hello, {name}")
-
-
-# Recreate Nintendo’s Super Mario Brothers's pyramid using hashes (#), allowing users to state height of pyramid
+# Recreate Nintendo’s Super Mario Brothers's pyramid using hashes (#), allowing users to specify height of pyramid
 
 while True:
     try:
