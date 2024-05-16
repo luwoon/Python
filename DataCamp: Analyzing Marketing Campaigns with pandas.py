@@ -56,6 +56,13 @@ language_displayed_subscribers = marketing[marketing['converted']==True].groupby
 language_conversion_rate = language_displayed_subscribers/language_displayed_total
 print(language_conversion_rate)
 
+# plot conversion rate by language displayed
+language_conversion_rate.plot(kind='bar')
+plt.title('Conversion rate by language\n', size = 16)
+plt.xlabel('Language', size = 14)
+plt.ylabel('Conversion rate (%)', size = 14)
+plt.show()
+
 # daily conversion rate
 daily_total = marketing.groupby(['date_served'])['user_id'].nunique()
 daily_subscribers = marketing[marketing['converted']==True].groupby(['date_served'])['user_id'].nunique()
