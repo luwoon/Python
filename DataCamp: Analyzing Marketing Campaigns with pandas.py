@@ -21,3 +21,13 @@ marketing['channel_code'] = marketing['subscribing_channel'].map(channel_dict)
 marketing['is_correct_lang'] = np.where(marketing['language_displayed'] == marketing['language_preferred'], 'Yes', 'No')
 
 marketing['DoW'] = marketing['date_subscribed'].dt.dayofweek
+
+daily_users = marketing.groupby(['date_served'])['user_id'].nunique()
+print(daily_users.head())
+
+# plot
+daily_users.plot()
+plt.title('Daily users')
+plt.ylabel('Number of users')
+plt.xticks(rotation=45)
+plt.show()
