@@ -46,19 +46,6 @@ english_subscribers = english_speakers[english_speakers['converted']==True]['use
 english_conversion_rate = english_subscribers/english_total
 print('English speaker conversion rate:', round(conversion_rate*100,2), '%')
 
-# compare conversion rate by language displayed
-language_displayed_total = marketing.groupby(['language_displayed'])['user_id'].nunique()
-language_displayed_subscribers = marketing[marketing['converted']==True].groupby(['language_displayed'])['user_id'].nunique()
-language_conversion_rate = language_displayed_subscribers/language_displayed_total
-print(language_conversion_rate)
-
-# plot conversion rate by language displayed
-language_conversion_rate.plot(kind='bar')
-plt.title('Conversion rate by language\n', size = 16)
-plt.xlabel('Language', size = 14)
-plt.ylabel('Conversion rate (%)', size = 14)
-plt.show()
-
 # daily conversion rate
 daily_total = marketing.groupby(['date_served'])['user_id'].nunique()
 daily_subscribers = marketing[marketing['converted']==True].groupby(['date_served'])['user_id'].nunique()
@@ -77,6 +64,29 @@ plt.ylabel('Conversion rate (%)', size = 14)
 plt.xlabel('Date', size = 14)
 plt.ylim(0)
 plt.show()
+
+def conversion_rate(dataframe, column_names):
+    column_conv = dataframe[dataframe['converted']==True].groupby(column_names)['user_id'].nunique()
+    column_total = dataframe.groupby(column_names)['user_id'].nunique()  
+    conversion_rate = column_conv/column_total
+    conversion_rate = conversion_rate.fillna(0)
+    return conversion_rate
+
+def plotting_conv(dataframe):
+    for column in dataframe:
+        plt.plot(dataframe.index, dataframe[column])
+        plt.title('Daily ' + str(column) + ' conversion rate\n', 
+                  size = 16)
+        plt.ylabel('Conversion rate', size = 14)
+        plt.xlabel('Date', size = 14)
+        plt.show()
+        plt.clf()
+
+# calculate conversion rate by age_group and visualise
+age_group_conv = conversion_rate(marketing, ['date_served', 'age_group'])
+print(age_group_conv)
+age_group_df = pd.DataFrame(age_group_conv.unstack(level=1))
+plotting_conv(age_group_df)
 
 channel_age = marketing.groupby(['marketing_channel', 'age_group'])\
                                 ['user_id'].count()
