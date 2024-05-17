@@ -39,11 +39,6 @@ subscribers = marketing[marketing['converted']==True]['user_id'].nunique()
 conversion_rate = subscribers/total
 print(round(conversion_rate*100, 2), "%")
 
-# calculate retention rate
-retained = marketing[marketing['is_retained']==True]['user_id'].nunique()
-retention_rate = retained/subscribers
-print(round(retention_rate*100, 2), "%")
-
 # conversion rate for English speakers
 english_speakers = marketing[marketing['language_displayed'] == 'English']
 english_total = english_speakers['user_id'].nunique()
@@ -99,6 +94,20 @@ plt.legend(loc = 'upper right',
            labels = channel_age_df.columns.values)
 plt.show()
 
-# find out which channel had the best retention rate
+# calculate retention rate
+retained = marketing[marketing['is_retained']==True]['user_id'].nunique()
+retention_rate = retained/subscribers
+print(round(retention_rate*100, 2), "%")
+
+# find out which channel had the best retention rate and create plot
 retention_total = marketing.groupby(['date_subscribed',
                                      'subscribing_channel'])['user_id'].nunique()
+retention_subs = marketing[marketing['is_retained']==True].groupby(['date_subscribed', 'subscribing_channel'])['user_id'].nunique()
+retention_rate = retention_subs/retention_total
+retention_rate_df = pd.DataFrame(retention_rate.unstack(level=1))
+retention_rate_df.plot()
+plt.title('Retention Rate by Subscribing Channel')
+plt.xlabel('Date Subscribed')
+plt.ylabel('Retention Rate (%)')
+plt.legend(loc = 'upper right', labels = retention_rate_df.columns.values)
+plt.show()
