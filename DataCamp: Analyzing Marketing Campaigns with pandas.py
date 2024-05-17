@@ -82,3 +82,23 @@ plt.ylabel('Conversion rate (%)', size = 14)
 plt.xlabel('Date', size = 14)
 plt.ylim(0)
 plt.show()
+
+channel_age = marketing.groupby(['marketing_channel', 'age_group'])\
+                                ['user_id'].count()
+
+# unstack channel_age and transform it into a DataFrame
+channel_age_df = pd.DataFrame(channel_age.unstack(level=1))
+
+# plot marketing channel by age group
+channel_age_df.plot(kind='bar')
+plt.title('Marketing channels by age group')
+plt.xlabel('Age Group')
+plt.ylabel('Users')
+# Add a legend to the plot
+plt.legend(loc = 'upper right', 
+           labels = channel_age_df.columns.values)
+plt.show()
+
+# find out which channel had the best retention rate
+retention_total = marketing.groupby(['date_subscribed',
+                                     'subscribing_channel'])['user_id'].nunique()
