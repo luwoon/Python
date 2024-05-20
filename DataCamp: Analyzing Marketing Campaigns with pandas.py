@@ -149,3 +149,29 @@ plt.xlabel('Date Subscribed')
 plt.ylabel('Retention Rate (%)')
 plt.legend(loc = 'upper right', labels = retention_rate_df.columns.values)
 plt.show()
+
+# index non-English language conversion rates against English conversion rates in the time period before the language b
+house_ads_bug = house_ads[house_ads['date_served'] < '2018-01-11']
+lang_conv = conversion_rate(house_ads_bug, 'language_displayed')
+spanish_index = lang_conv['Spanish']/lang_conv['English']
+arabic_index = lang_conv['Arabic']/lang_conv['English']
+german_index = lang_conv['German']/lang_conv['English']
+print("Spanish index:", spanish_index)
+print("Arabic index:", arabic_index)
+print("German index:", german_index)
+
+converted = house_ads.groupby(['date_served', 'language_preferred']).agg({'user_id':'nunique', 'converted':'sum'})
+converted_df = pd.DataFrame(converted.unstack(level=1))
+
+# create English conversion rate column for affected period
+converted['english_conv_rate'] = converted.loc['2018-01-11': '2018-01-31'][('converted', 'English')]
+
+# create expected conversion rates for each language
+converted['expected_spanish_rate'] = converted['english_conv_rate']*spanish_index
+converted['expected_arabic_rate'] = converted['english_conv_rate']*arabic_index
+converted['expected_german_rate'] = converted['english_conv_rate']*german_index
+
+# mMultiply number of users by the expected conversion rate
+converted['expected_spanish_conv'] = converted['expected_spanish_rate']*converted[('user_id', 'Spanish')]/100
+converted['expected_arabic_conv'] = converted['expected_arabic_rate']*converted[('user_id', 'Arabic')]/100
+converted['expected_german_conv'] = converted['expected_german_rate']*converted[('user_id', 'German')]/100
