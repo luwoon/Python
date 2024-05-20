@@ -88,6 +88,34 @@ print(age_group_conv)
 age_group_df = pd.DataFrame(age_group_conv.unstack(level=1))
 plotting_conv(age_group_df)
 
+# daily conversion rate 
+daily_conv_channel = conversion_rate(marketing, ['date_served', 'marketing_channel'])
+daily_conv_channel = pd.DataFrame(daily_conv_channel.unstack(level = 1))
+plotting_conv(daily_conv_channel)
+
+# check whether users are more likely to convert on weekends compared with weekday
+marketing['DoW_served'] = marketing['date_served'].dt.dayofweek
+DoW_conversion = conversion_rate(marketing, ['DoW_served', 'marketing_channel'])
+DoW_df = pd.DataFrame(DoW_conversion.unstack(level=1))
+DoW_df.plot()
+plt.title('Conversion rate by day of week\n')
+plt.ylim(0)
+plt.show()
+
+# conversion by language over time
+house_ads = marketing[marketing['marketing_channel'] == 'House Ads']
+conv_lang_channel = conversion_rate(house_ads, ['date_served', 'language_displayed'])
+conv_lang_df = pd.DataFrame(conv_lang_channel.unstack(level=1))
+plotting_conv(conv_lang_df)
+
+house_ads['is_correct_lang'] = np.where(house_ads['language_displayed'] == house_ads['language_preferred'], 'Yes', 'No')
+language_check = house_ads.groupby(['date_served', 'is_correct_lang'])['user_id'].count()
+language_check_df = pd.DataFrame(language_check.unstack(level=1)).fillna(0)
+print(language_check_df)
+language_check_df['pct'] = language_check_df['Yes']/language_check_df.sum(axis=1)
+plt.plot(language_check_df.index.values, language_check_df['pct'])
+plt.show()
+
 channel_age = marketing.groupby(['marketing_channel', 'age_group'])\
                                 ['user_id'].count()
 
