@@ -171,7 +171,14 @@ converted['expected_spanish_rate'] = converted['english_conv_rate']*spanish_inde
 converted['expected_arabic_rate'] = converted['english_conv_rate']*arabic_index
 converted['expected_german_rate'] = converted['english_conv_rate']*german_index
 
-# mMultiply number of users by the expected conversion rate
+# multiply number of users by the expected conversion rate
 converted['expected_spanish_conv'] = converted['expected_spanish_rate']*converted[('user_id', 'Spanish')]/100
 converted['expected_arabic_conv'] = converted['expected_arabic_rate']*converted[('user_id', 'Arabic')]/100
 converted['expected_german_conv'] = converted['expected_german_rate']*converted[('user_id', 'German')]/100
+
+converted = converted.loc['2018-01-11':'2018-01-31']
+expected_subs = converted['expected_spanish_conv'].sum() + converted['expected_arabic_conv'].sum() + converted['expected_german_conv'].sum()
+# calculate actual number of subscribers
+actual_subs = converted[('converted','Spanish')].sum() + converted[('converted','Arabic')].sum() + converted[('converted','German')].sum()
+lost_subs = expected_subs - actual_subs
+print(lost_subs)
