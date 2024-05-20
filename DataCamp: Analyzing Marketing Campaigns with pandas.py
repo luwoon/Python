@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.stats import ttest_ind
 
 marketing = pd.read_csv('marketing.csv', parse_dates=['date_served', 'date_subscribed', 'date_canceled'])
 
@@ -182,3 +183,44 @@ expected_subs = converted['expected_spanish_conv'].sum() + converted['expected_a
 actual_subs = converted[('converted','Spanish')].sum() + converted[('converted','Arabic')].sum() + converted[('converted','German')].sum()
 lost_subs = expected_subs - actual_subs
 print(lost_subs)
+
+# A/B testing
+# allocation
+email = marketing[marketing['marketing_channel'] == 'Email']
+alloc = email.groupby('variant')['user_id'].nunique()
+alloc.plot(kind='bar')
+plt.title('Personalization test allocation')
+plt.ylabel('# participants')
+plt.show()
+
+subscribers = email.groupby(['user_id', variant'])['converted'].max()
+subscribers_df = pd.DataFrame(subscribers.unstack(level=1)) 
+control = subscribers_df['control'].dropna()
+personalization = subscribers_df['personalization'].dropna()
+print('Control conversion rate:', np.mean(control))
+print('Personalization conversion rate:', np.mean(personalization))
+
+def lift(a,b):
+    a_mean = np.mean(a)
+    b_mean = np.mean(b)
+    lift = (b_mean-a_mean)/a_mean
+    return str(round(lift*100, 2)) + '%'
+  
+# print lift() with control and personalization as inputs
+print(lift(control, personalization))
+
+def ab_segmentation(segment):g
+  for subsegment in np.unique(marketing[segment].values):
+      print(subsegment)
+      email = marketing[(marketing['marketing_channel'] == 'Email') & (marketing[segment] == subsegment)]
+
+      subscribers = email.groupby(['user_id', 'variant'])['converted'].max()
+      subscribers = pd.DataFrame(subscribers.unstack(level=1)) 
+      control = subscribers['control'].dropna()
+      personalization = subscribers['personalization'].dropna()
+
+      print('lift:', lift(control, personalization))
+      print('t-statistic:', stats.ttest_ind(control, personalization), '\n\n')
+
+ab_segmentation('language_displayed')
+ab_segmentation('age_group')
