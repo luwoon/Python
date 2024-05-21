@@ -209,7 +209,7 @@ def lift(a,b):
 # print lift() with control and personalization as inputs
 print(lift(control, personalization))
 
-def ab_segmentation(segment):g
+def ab_segmentation(segment):
   for subsegment in np.unique(marketing[segment].values):
       print(subsegment)
       email = marketing[(marketing['marketing_channel'] == 'Email') & (marketing[segment] == subsegment)]
