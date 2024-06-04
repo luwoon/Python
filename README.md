@@ -1,6 +1,6 @@
 # Python Portfolio
 
-This repository contains samples of PYthon code that I have written.
+This repository contains samples of Python code that I have written.
 
 | Project Name    | Description |
 | -------- | ------- |
