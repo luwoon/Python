@@ -1,3 +1,49 @@
+# convert to lowercase
+
+s = input("")
+print(s.lower())
+
+
+# replacing
+
+s = input("")
+s = s.replace(' ', '...')
+print(s)
+
+
+# emojis
+
+s = input("")
+s = s.replace(':)', '🙂').replace(':(', '🙁')
+print(s)
+
+
+# e = mc^2
+
+mass = int(input("m: "))
+e = mass * 300000000 ** 2
+print(f"E: {e}")
+
+
+# tip calculator
+
+def main():
+    dollars = dollars_to_float(input("How much was the meal? "))
+    percent = percent_to_float(input("What percentage would you like to tip? "))
+    tip = dollars * percent
+    print(f"Leave ${tip:.2f}")
+
+def dollars_to_float(d):
+    d = float(d[1:])
+    return d
+
+def percent_to_float(p):
+    p = float(p[:-1])/100
+    return p
+
+main()
+
+
 # convert camel case to snake skin
 
 def main():
