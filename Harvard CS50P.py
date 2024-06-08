@@ -44,6 +44,98 @@ def percent_to_float(p):
 main()
 
 
+# if else
+
+s = input("What is the Answer to the Great Question of Life, the Universe, and Everything? ").strip()
+
+if int(s) == 42 or s == 'forty two' or s == 'forty-two':
+  print('Yes')
+else:
+  print('No')
+
+
+# seinfeld
+
+s = input("Greeting: ").lower()
+
+if s[:5] == "hello":
+  print("$0")
+elif s[0] == "h" and s[:5] != "hello":
+  print("$20")
+else:
+  print("$100")
+
+
+# file extensions
+
+s = input("File name: ").lower()
+
+dict = {
+  ".gif": "image/gif",
+  ".jpg": "image/jpg",
+  ".jpeg": "image/jpeg",
+  ".png": "image/png",
+  ".pdf": "application/pdf",
+  ".txt": "text/plain",
+  ".zip": "application/zip"
+}
+
+for extension, type in dict.items():
+  if s.endswith(extension):
+    print(type)
+    break
+else:
+    print("application/octet-stream")
+
+
+# arithmetic
+
+def main():
+  s = input("Expression: ")
+  x, y, z = s.split(" ")
+  x = int(x)
+  z = int(z)
+  result = math(x, y, z)
+  print(f"{result:.1f}")
+
+def math(x, y, z):
+  if y == "+":
+    return x + z
+  elif y == "-":
+    return x - z
+  elif y == "/":
+    return float(x) / z
+  elif y == "*":
+    return x * z 
+  
+main()
+
+
+# meal time
+
+def main():
+    time = input("What time is it? ")
+    t = convert(time)
+    if 7.0 <= t <= 8.0:
+      print("breakfast time")
+    elif 12.0 <= t <= 13.0:
+      print("lunch time")
+    elif 18.0 <= t <= 19.0:
+      print("dinner time")
+    else:
+      pass
+
+def convert(time):
+    h, m = time.split(":")
+    h = int(h)
+    m = int(m)
+    t = h + m / 60.0
+    return t
+
+if __name__ == "__main__":
+    main()
+
+
 # convert camel case to snake skin
 
 def main():
