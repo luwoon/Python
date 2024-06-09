@@ -10,12 +10,14 @@ def main():
     else:
       pass
 
+
 def convert(time):
     h, m = time.split(":")
     h = int(h)
     m = int(m)
     t = h + m / 60.0
     return t
+
 
 if __name__ == "__main__":
     main()
