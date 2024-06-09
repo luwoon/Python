@@ -3,6 +3,7 @@ def main():
   output = omit(s)
   print(f"Output: {output}")
 
+
 def omit(s):
   vowels = ['a', 'e', 'i', 'o', 'u']
   output = ""
@@ -12,6 +13,7 @@ def omit(s):
     else:
       output += char
   return output  
+
 
 if __name__ == "__main__":
   main()
