@@ -21,15 +21,18 @@ dict = {
   "watermelon":"80"
 }
 
+
 def main():
   item = input("Item: ").lower()
   cal = func(item, dict)
+
 
 def func(item, dict):
   if item in dict:
     print(dict[item])
   else:
     return None 
-  
+
+
 if __name__ == "__main__":
   main()
