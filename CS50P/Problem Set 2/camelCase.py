@@ -3,6 +3,7 @@ def main():
   s = convert(s)
   print(f"snake_skin: {s}")
 
+
 def convert(s):
   result = ""
   for index, a in enumerate(s):
@@ -11,6 +12,7 @@ def convert(s):
     else:
       result += a.lower()
   return result
+
 
 if __name__ == "__main__":
   main()
