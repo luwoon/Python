@@ -9,8 +9,8 @@ dict = {
 }
 
 for extension, type in dict.items():
-  if s.endswith(extension):
-    print(type)
-    break
+    if s.endswith(extension):
+      print(type)
+      break
 else:
     print("application/octet-stream")
