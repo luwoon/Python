@@ -6,6 +6,7 @@ def main():
   result = math(x, y, z)
   print(f"{result:.1f}")
 
+
 def math(x, y, z):
   if y == "+":
     return x + z
@@ -15,6 +16,7 @@ def math(x, y, z):
     return float(x) / z
   elif y == "*":
     return x * z 
-  
+
+
 if __name__ == "__main__":
   main()
