@@ -1,13 +1,14 @@
 # fuel
 
 def main():
-    get_frac()
-    if float(num) / den <= 0.01:
+    num, den = get_frac()  # Ensure `num` and `den` are obtained from get_frac
+    fraction = float(num) / den
+    if fraction <= 0.01:
         print("E")
-    elif float(num) / den >= 0.99:
+    elif fraction >= 0.99:
         print("F")
     else:
-        output = num / den * 100
+        output = fraction * 100
         print(f"{output}%")
 
 def get_frac():
@@ -18,7 +19,7 @@ def get_frac():
                 num, den = user_input.split("/")
                 num = int(num)
                 den = int(den)
-                if den != 0 and num < den:
+                if den != 0 and num <= den:  # Changed to `<=` to match your initial logic
                     return num, den
             except (ValueError, ZeroDivisionError):
                 pass
