@@ -20,7 +20,7 @@ def get_frac():
                 den = int(den)
                 if den != 0 and num < den:
                     return num, den
-            except ValueError:
+            except (ValueError, ZeroDivisionError):
                 pass
 
 if __name__ == "__main__":
