@@ -13,7 +13,7 @@ menu = {
 total = 0
 
 while True:
-  item = input("Item: ")
+  item = input("Item: ").title()
   if item in menu:
     try:
       total += menu[item]
