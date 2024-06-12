@@ -26,4 +26,5 @@ def req_rate():
         pass
 
 
-main()
+if __name__ == "__main__":
+    main() 
