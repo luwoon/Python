@@ -7,9 +7,9 @@ def main():
         sys.exit("Too few command-line arguments")
     elif len(sys.argv) > 3:
         sys.exit("Too many command-line arguments")
-    elif not sys.argv[1].endswith(".csv"):
+    elif not sys.argv[1].lower().endswith(".csv"):
         sys.exit("Not a CSV file")
-    elif not sys.argv[2].endswith(".csv"):
+    elif not sys.argv[2].lower().endswith(".csv"):
         sys.exit("Not a CSV file")
 
     input_file = sys.argv[1]
