@@ -58,8 +58,6 @@ class Jar:
         return self._capacity
 
     @property
-
-    # Add up prices of order
     def size(self):
         return self._size
 
